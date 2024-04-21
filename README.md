@@ -18,4 +18,4 @@
 
 
 
-User Interface Interaction: Throughout your exploration, the app’s UI allows you to filter results, adjust visualization parameters, and even click on individual nodes to read summaries of the blog’s content or see its position within the overall network.![image](https://github.com/AhmedHamdyKotp/ETL-SE/assets/160382377/ea262588-7f3c-4c8b-9c1b-8b97aaa7bbd6)
+User Interface Interaction: Throughout your exploration, the app’s UI allows you to filter results, adjust visualization parameters, and even click on individual nodes to read summaries of the blog’s content or see its position within the overall network.![image]
