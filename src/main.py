@@ -1,30 +1,26 @@
-
 import serpapi as se
-from serpapi import GoogleSearch
 import requests as re
-import os
-from dotenv  import load_dotenv
 import sys
-env_API = 'data/.env'
-load_dotenv(dotenv_path=env_API)
-apik = os.getenv('S_API')
-sys.path.append("src/modules")
-import scraper 
-    
-def userInput(word):
+sys.path.append("src/modules")  
+import scraper
+
+def user_input(api_key: str, search_term: str) -> None:
+
     params = {
-    "q": word, # the search term
-    'engine': 'google',
-    'hl':'en',
-    'api_key': apik, 
-    'num' : 100,
+        "q": search_term,
+        'engine': 'google',
+        'hl':'en',
+        'api_key': api_key,
+        'num' : 100,
     }
-    s = GoogleSearch(params)
-    result = s.get_dict()  
+
+    search = se.GoogleSearch(params)
+    result = search.get_dict()
     scraper.organizing(result['organic_results'])
 
-
-if  __name__ == "__main__":
+if __name__ == "__main__":
+    print("Enter your SerpAPI key: ")
+    api_key = input()
     print("Enter a word to look for:")
-    wd = input()
-    res = userInput(wd)
+    search_term = input()
+    user_input(api_key, search_term)
