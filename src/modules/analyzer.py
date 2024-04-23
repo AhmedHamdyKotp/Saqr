@@ -19,6 +19,7 @@ def extract_profession(data):
         for url in urls:
             print(f"URL: {url}")
         print("-------------------------")
+    v.make_the_nodes(profession_found)
     return profession_found
 
 
