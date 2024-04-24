@@ -7,7 +7,7 @@ import constants
 
 def extract_profession(data):
     print("Choose from these categories : ")
-    print("ProfessionS\nNews")
+    print("ProfessionS\nNews\nPerson\nGeneral")
     choice = input()
     profession = constants.filter(choice)    
     profession_found = {}
@@ -18,7 +18,7 @@ def extract_profession(data):
                 profession_found[i] = profession_found.get(i, []) + [item['url']]
 
     for profession, urls in profession_found.items():
-        print(f"Profession: {profession}")
+        print(f"{choice}: {profession}")
         for url in urls:
             print(f"URL: {url}")
         print("-------------------------")

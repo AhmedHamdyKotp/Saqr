@@ -94,9 +94,71 @@ def filter (choosen):
     'The Irish Times', 'The Scotsman', 'The Hindu', 'Dawn', 'The Express Tribune',
     'South China Morning Post', 'The Times of Israel', 'The Nation', 'The Star', 'The New Paper',
     'The Standard', 'The Mercury', 'The Star', 'The Daily Nation', 'The East African',
+    'Al-Ahram', 'Al-Masry Al-Youm', 'Youm7', 'Ahram Online', 'Egypt Independent',
     ]
+    popular_people = [
+    'Marilyn Monroe', 'Abraham Lincoln', 'Nelson Mandela', 'Queen Elizabeth II', 'John F. Kennedy',
+    'Martin Luther King', 'Winston Churchill', 'Donald Trump', 'Bill Gates', 'Muhammad Ali',
+    'Mahatma Gandhi', 'Mother Teresa', 'Christopher Columbus', 'Charles Darwin', 'Elvis Presley',
+    'Albert Einstein', 'Paul McCartney', 'Queen Victoria', 'Pope Francis', 'Jawaharlal Nehru',
+    'Leonardo da Vinci', 'Vincent Van Gogh', 'Franklin D. Roosevelt', 'Pope John Paul II', 'Thomas Edison',
+    'Rosa Parks', 'Lyndon Johnson', 'Ludwig Beethoven', 'Oprah Winfrey', 'Indira Gandhi',
+    'Eva Peron', 'Benazir Bhutto', 'George Orwell', 'Vladimir Putin', 'Dalai Lama',
+    'Walt Disney', 'Neil Armstrong', 'Peter Sellers', 'Barack Obama', 'Malcolm X',
+    'J.K.Rowling', 'Richard Branson', 'Pele', 'Angelina Jolie', 'Jesse Owens',
+    'John Lennon', 'Henry Ford', 'Haile Selassie', 'Joseph Stalin',
+    'Amr Diab', 'Nancy Ajram', 'Elissa', 'Adel Emam', 'Hassan El Shafei',
+    'Elias J. Corey', 'Ahmed Zewail', 'Ibn Khaldun'
+    ]
+    any = [
+    'news', 'weather', 'sports', 'entertainment', 'technology',
+    'health', 'finance', 'education', 'travel', 'food',
+    'fashion', 'music', 'movies', 'games', 'jobs',
+    'real estate', 'shopping', 'deals', 'science', 'politics',
+    'relationships', 'fitness', 'pets', 'automotive', 'legal',
+    'gardening', 'home improvement', 'art', 'history', 'geography',
+    'mathematics', 'languages', 'literature', 'philosophy', 'psychology',
+    'economics', 'biology', 'chemistry', 'physics', 'astronomy',
+    'medicine', 'law', 'business', 'marketing', 'social media',
+    'programming', 'coding', 'software', 'hardware', 'networking',
+    'security', 'hacking', 'machine learning', 'data science', 'AI',
+    'blockchain', 'cryptocurrency', 'bitcoin', 'ethereum', 'NFTs',
+    'startups', 'entrepreneurship', 'investing', 'stocks', 'trading',
+    'travel destinations', 'hotels', 'flights', 'vacations', 'tourism',
+    'recipes', 'cooking', 'baking', 'nutrition', 'diets',
+    'workouts', 'yoga', 'meditation', 'mental health', 'wellness',
+    'dogs', 'cats', 'wildlife', 'nature', 'environment',
+    'cars', 'motorcycles', 'electric vehicles', 'auto repair', 'car reviews',
+    'legal advice', 'lawsuits', 'contracts', 'intellectual property', 'compliance',
+    'DIY projects', 'interior design', 'landscaping', 'renovation', 'furniture',
+    'painting', 'sculpture', 'photography', 'theatre', 'concert', 'festival', 'live performance',
+    'art', 'gallery', 'painting', 'sculpture', 'exhibition',
+    'movie', 'cinema', 'actor', 'director', 'hollywood',
+    'book', 'novel', 'author', 'literature', 'poetry',
+    'travel', 'vacation', 'adventure', 'tourism', 'destination',
+    'food', 'restaurant', 'recipe', 'cuisine', 'cooking',
+    'fashion', 'clothing', 'designer', 'runway', 'style',
+    'technology', 'gadget', 'smartphone', 'app', 'software',
+    'health', 'fitness', 'nutrition', 'diet', 'exercise',
+    'sports', 'game', 'athlete', 'competition', 'workout',
+    'education', 'school', 'university', 'student', 'teacher',
+    'business', 'finance', 'economy', 'startup', 'entrepreneur',
+    'science', 'research', 'innovation', 'discovery', 'experiment',
+    'politics', 'government', 'election', 'policy', 'law',
+    'environment', 'nature', 'wildlife', 'conservation', 'climate',
+    'history', 'culture', 'tradition', 'heritage', 'archaeology',
+    'psychology', 'mind', 'behavior', 'therapy', 'counseling',
+    'philosophy', 'ethics', 'logic', 'metaphysics', 'epistemology',
+    'mathematics', 'geometry', 'algebra', 'calculus', 'statistics',
+    'engineering', 'mechanics', 'electronics', 'robotics', 'aerospace'
+  ]
+
     if choosen == "Profession":
         return professions
     if choosen == "News" :
         return popular_news_channels
+    if choosen == "Person":
+        return popular_people
+    if choosen == "General":
+        return any
 
