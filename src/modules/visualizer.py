@@ -29,9 +29,18 @@ def make_the_nodes(profession_found):
                         individual_b = individual_b[:10]                    
                    
                     G.add_edge(individual_a, individual_b)  # Connect individuals sharing URLs
+
+    # Node sizes based on degree
+    node_sizes = [G.degree(node) * 100 for node in G]
+
+    # Node colors
     node_colors = ['skyblue' if G.nodes[node]['type'] == 'individual' else 'lightgreen' for node in G]
-    pos = nx.spring_layout(G,k=0.3)
-    nx.draw(G, pos, with_labels=True, node_color=node_colors, node_size=500, font_size=8)
+
+    # Position nodes using the spring layout
+    pos = nx.spring_layout(G, k=0.3)
+
+    # Draw the graph
+    nx.draw(G, pos, with_labels=True, node_color=node_colors, node_size=node_sizes, font_size=8)
     plt.show()
-    
+
     return G
