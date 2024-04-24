@@ -1,7 +1,7 @@
 import sys
 sys.path.append('src/utils')
 sys.path.append('src/modules')
-
+import visualizer as v
 import scraper as sc
 import constants 
 
