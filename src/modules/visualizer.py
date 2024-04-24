@@ -13,21 +13,16 @@ def make_the_nodes(profession_found):
             if len(individual_node) > 10 :
                 individual_node = individual_node[:10]
             G.add_node(individual_node, type='individual', profession=profession, url=url)
-            G.add_edge(individual_node, profession)  # Connect individual to profession
+            G.add_edge(individual_node, profession)  
             GN.append(profession)
-
-    # Calculate centrality measures
     centrality = nx.degree_centrality(G)
-    sorted_centrality = sorted(centrality.items(), key=lambda x: x[1], reverse=True)
+    sortion = sorted(centrality.items(), key=lambda x: x[1], reverse=True)
 
     print("Top 10 nodes by degree centrality:")
-    for node, cent in sorted_centrality[:10]:
+    for node, cent in sortion[:10]:
         print(f"{node}: {cent}")
-
-    # Community detection
-    communities = nx.algorithms.community.greedy_modularity_communities(G)
-    print(f"Detected {len(communities)} communities.")
-
+    com = nx.algorithms.community.greedy_modularity_communities(G)
+    print(f"Detected {len(com)} communities.")
     node_sizes = [G.degree(node) * 100 for node in G]
     node_colors = ['skyblue' if G.nodes[node]['type'] == 'individual' else 'lightgreen' for node in G]
     pos = nx.spring_layout(G, k=0.3)
