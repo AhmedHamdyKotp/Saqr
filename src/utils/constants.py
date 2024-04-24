@@ -110,7 +110,7 @@ def filter (choosen):
     'Amr Diab', 'Nancy Ajram', 'Elissa', 'Adel Emam', 'Hassan El Shafei',
     'Elias J. Corey', 'Ahmed Zewail', 'Ibn Khaldun'
     ]
-    any = [
+    any = ['google scholar'
     'news', 'weather', 'sports', 'entertainment', 'technology',
     'health', 'finance', 'education', 'travel', 'food',
     'fashion', 'music', 'movies', 'games', 'jobs',

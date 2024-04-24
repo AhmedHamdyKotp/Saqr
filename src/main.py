@@ -8,12 +8,15 @@ def user_input(api_key: str) -> None:
     while True:
         print("Enter a word to look for (or 'exit' to quit):")
         search_term = input()
+        print("Choose the Certen search engine you prefare : ")
+        search_engines = ['google', 'bing', 'yahoo', 'duckduckgo', 'baidu', 'yandex', 'google_scholar']
+        choice = input()
         if search_term.lower() == 'exit':
             break
 
         params = {
             "q": search_term,
-            'engine': 'google',
+            'engine': choice,
             'hl':'en',
             'api_key': api_key,
             'num' : 100,

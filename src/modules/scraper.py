@@ -8,8 +8,8 @@ def organizing(or_result):
     for item in or_result :
         url = item['link']
         title = item['title']
-        snippet = item['snippet']
-        data={"url":url,"title":title,"snippet":snippet}
+        snippet = item.get('snippet', "")
+        data={"url":url,"title":title,"snippet":snippet if snippet else  ""}
         Data.append(data)
     analyzer.extract_profession(Data)
     
