@@ -1,6 +1,6 @@
     
 
-def get_professions ():
+def filter (choosen):
     professions = [
         'CEO',
         'M.D.',
@@ -75,5 +75,28 @@ def get_professions ():
         'Butcher',
         'Candlestick Maker'
     ]
-    return [profession.split(' ')[0] for profession in professions]
+    popular_news_channels = [
+    'BBC News', 'CNN', 'The Guardian', 'The New York Times', 'The Washington Post',
+    'The Wall Street Journal', 'Reuters', 'Al Jazeera', 'The Associated Press', 'Bloomberg',
+    'Forbes', 'ABC News', 'NBC News', 'CBS News', 'Fox News',
+    'USA Today', 'The Huffington Post', 'CNBC', 'Time', 'Newsweek',
+    'The Economist', 'Financial Times', 'Business Insider', 'Politico', 'NPR',
+    'Sky News', 'Daily Mail', 'The Independent', 'The Telegraph', 'Los Angeles Times',
+    'Chicago Tribune', 'The Boston Globe', 'San Francisco Chronicle', 'The Seattle Times', 'The Atlanta Journal-Constitution',
+    'The Philadelphia Inquirer', 'The Dallas Morning News', 'The Denver Post', 'Miami Herald', 'The Arizona Republic',
+    'The Globe and Mail', 'Toronto Star', 'National Post', 'Le Monde', 'Der Spiegel',
+    'Frankfurter Allgemeine Zeitung', 'Süddeutsche Zeitung', 'El País', 'La Repubblica', 'Corriere della Sera',
+    'The Times of India', 'Hindustan Times', 'The Hindu', 'China Daily', 'People\'s Daily',
+    'The Sydney Morning Herald', 'The Age', 'The Asahi Shimbun', 'Yomiuri Shimbun', 'The Japan Times',
+    'The Korea Herald', 'The Chosun Ilbo', 'The Straits Times', 'The Bangkok Post', 'The Jakarta Post',
+    'The Moscow Times', 'Izvestia', 'Kommersant', 'The Times', 'The Sunday Times',
+    'The Australian', 'The New Zealand Herald', 'Haaretz', 'The Jerusalem Post', 'Gulf News',
+    'The Irish Times', 'The Scotsman', 'The Hindu', 'Dawn', 'The Express Tribune',
+    'South China Morning Post', 'The Times of Israel', 'The Nation', 'The Star', 'The New Paper',
+    'The Standard', 'The Mercury', 'The Star', 'The Daily Nation', 'The East African',
+    ]
+    if choosen == "Profession":
+        return professions
+    if choosen == "News" :
+        return popular_news_channels
 

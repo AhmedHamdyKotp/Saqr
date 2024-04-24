@@ -6,7 +6,10 @@ import scraper as sc
 import constants 
 
 def extract_profession(data):
-    profession = constants.get_professions()    
+    print("Choose from these categories : ")
+    print("ProfessionS\nNews")
+    choice = input()
+    profession = constants.filter(choice)    
     profession_found = {}
 
     for item in data:
