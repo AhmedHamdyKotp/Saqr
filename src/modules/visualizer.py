@@ -10,7 +10,9 @@ def make_the_nodes(profession_found):
 
     for profession, urls in profession_found.items():
         for url in urls:
-            individual_node = f"{profession}_{url.split('/')[-1]}"  # Unique identifier for the individual
+            individual_node = f"{profession}_{url.split('/')[-1]}"
+            if len(individual_node) > 10 :
+                individual_node = individual_node[:10]
             G.add_node(individual_node, type='individual', profession=profession, url=url)
             G.add_edge(individual_node, profession)  # Connect individual to profession
 
@@ -21,6 +23,11 @@ def make_the_nodes(profession_found):
                 for url in shared_urls:
                     individual_a = f"{pro_a}_{url.split('/')[-1]}"
                     individual_b = f"{pro_b}_{url.split('/')[-1]}"
+                    if len(individual_a) > 10 :
+                        individual_a = individual_a[:10]
+                    if len(individual_b) > 10 :
+                        individual_b = individual_b[:10]                    
+                   
                     G.add_edge(individual_a, individual_b)  # Connect individuals sharing URLs
     node_colors = ['skyblue' if G.nodes[node]['type'] == 'individual' else 'lightgreen' for node in G]
     pos = nx.spring_layout(G,k=0.3)
