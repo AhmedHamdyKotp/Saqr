@@ -1,10 +1,9 @@
-
-
 import networkx as nx
 import matplotlib.pyplot as plt
 
 def make_the_nodes(profession_found):
     G = nx.Graph()
+    GN = []
     for profession in profession_found:
         G.add_node(profession, type='profession')
 
@@ -15,20 +14,19 @@ def make_the_nodes(profession_found):
                 individual_node = individual_node[:10]
             G.add_node(individual_node, type='individual', profession=profession, url=url)
             G.add_edge(individual_node, profession)  # Connect individual to profession
+            GN.append(profession)
 
-    # for pro_a, urls_a in profession_found.items():
-    #     for pro_b, urls_b in profession_found.items():
-    #         if pro_a != pro_b:
-    #             shared_urls = set(urls_a).intersection(urls_b)
-    #             for url in shared_urls:
-    #                 individual_a = f"{pro_a}_{url.split('/')[-1]}"
-    #                 individual_b = f"{pro_b}_{url.split('/')[-1]}"
-    #                 if len(individual_a) > 10 :
-    #                     individual_a = individual_a[:10]
-    #                 if len(individual_b) > 10 :
-    #                     individual_b = individual_b[:10]                    
-                   
-    #                 G.add_edge(individual_a, individual_b)  # Connect individuals sharing URLs
+    # Calculate centrality measures
+    centrality = nx.degree_centrality(G)
+    sorted_centrality = sorted(centrality.items(), key=lambda x: x[1], reverse=True)
+
+    print("Top 10 nodes by degree centrality:")
+    for node, cent in sorted_centrality[:10]:
+        print(f"{node}: {cent}")
+
+    # Community detection
+    communities = nx.algorithms.community.greedy_modularity_communities(G)
+    print(f"Detected {len(communities)} communities.")
 
     node_sizes = [G.degree(node) * 100 for node in G]
     node_colors = ['skyblue' if G.nodes[node]['type'] == 'individual' else 'lightgreen' for node in G]
