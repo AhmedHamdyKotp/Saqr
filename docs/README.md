@@ -4,12 +4,12 @@
 
 
 ## Project Overview
-This project aims to analyze and visualize online social networks using publicly available data from search engine results. By leveraging web scraping techniques and the SERPAPI (Search Engine Results Page API), we gather information about relationships between websites and topics of interest. The collected data is used to construct a network graph using NetworkX and visualize network properties using heatmaps and 3D mesh models.
+  *This project aims to analyze and visualize online social networks using publicly available data from search engine results. By leveraging web scraping techniques and the SERPAPI (Search Engine Results Page API), we gather information about relationships between           websites and topics of interest. The collected data is used to construct a network graph using NetworkX and visualize network properties using heatmaps and 3D mesh models.
 
 ## Project Components
 
 ### 1. Web Scraping with SERPAPI  ---> DONE !!
-We implement web scraping to extract data from search engine results pages (SERPs) using the SERPAPI.
+  *We implement web scraping to extract data from search engine results pages (SERPs) using the SERPAPI.
 
 ### 2. Network Construction with NetworkX ---> DONE !!
 We utilize NetworkX, a Python library for network analysis, to build a graph representing the relationships between websites and topics. Websites are represented as nodes and relationships (e.g., co-occurrence in search results) as edges.
