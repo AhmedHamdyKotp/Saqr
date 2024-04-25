@@ -40,7 +40,7 @@ We welcome contributions to ETL-SE! If you have suggestions for improvements or 
 
 ## License
 
-ETL-SE is released under the MIT License. See the LICENSE file for more details.
+It stills considered as Startup ....
 
 ## Contact
 
