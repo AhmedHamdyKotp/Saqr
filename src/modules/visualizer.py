@@ -1,5 +1,9 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+import sys
+sys.path.append('algorithms')
+from algorithms import h_map_algo as ht
+
 
 def make_the_nodes(profession_found):
     G = nx.Graph()
@@ -26,11 +30,17 @@ def make_the_nodes(profession_found):
     node_sizes = [G.degree(node) * 100 for node in G]
     node_colors = ['skyblue' if G.nodes[node]['type'] == 'individual' else 'lightgreen' for node in G]
     pos = nx.spring_layout(G, k=0.3)
-    x = [pos[node][0] for node in G.nodes if G.nodes[node]['type'] == 'profession']
-    y = [pos[node][1] for node in G.nodes if G.nodes[node]['type'] == 'profession']
-    print("x:", x)
-    print("y:", y)
+    heatmap_algorithms(pos,G)
     nx.draw(G, pos, with_labels=True, node_color=node_colors, node_size=node_sizes, font_size=8)
     plt.show()
 
     return G
+
+def heatmap_algorithms(pos,G):
+    x = []
+    y = []
+    for node in G.nodes:
+        if G.nodes[node]['type'] == 'profession':
+            x.append(pos[node][0])
+            y.append(pos[node][1])
+    return x,y
