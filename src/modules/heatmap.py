@@ -14,12 +14,12 @@ def getter (x,y) :
     for i in y :
         Y.append(i)
 
-def start (x , y):
-    x_mesh, y_mesh ,xc= k.mesh(X, Y)
-    intensity_l = k.distance(xc,X)
+def start ():
+    x_mesh, y_mesh ,xc , yc= k.mesh(X, Y)
+    intensity_l = k.distance(xc,yc,X,Y)
     inten = np.array(intensity_l)
     plt.pcolormesh(x_mesh,y_mesh,inten)
-    plt.plot(x,y,'ro')
+    plt.plot(X,Y,'ro')
     plt.colorbar()
     plt.show()
 
