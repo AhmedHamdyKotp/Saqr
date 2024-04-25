@@ -2,8 +2,9 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import sys
 sys.path.append('algorithms')
-from algorithms import h_map_algo as ht
 
+import hmap as ht
+import heatmap as hm
 
 def make_the_nodes(profession_found):
     G = nx.Graph()
@@ -43,4 +44,9 @@ def heatmap_algorithms(pos,G):
         if G.nodes[node]['type'] == 'profession':
             x.append(pos[node][0])
             y.append(pos[node][1])
-    return x,y
+    ht.getter(x,y)
+    hm.getter(x,y)
+    hm.start()
+
+
+
