@@ -1,4 +1,4 @@
-<img src="data/logo.jpeg">
+!logo.jpeg
 
 # Analyzing Online Social Networks through Search Engine Data
 ## Project Overview
