@@ -20,7 +20,7 @@ We perform basic network analysis to identify key nodes (websites/topics) based 
 ### 4. Heatmap Visualization ---> DONE !!
 We use heatmap visualization techniques to depict the strength of relationships (edges) between nodes (websites/topics). The heatmap is color-coded based on edge weights or other network metrics to highlight important connections.
 
-### 5. 3D Mesh Modeling 
+### 5. 3D Mesh Modeling ---> DONE !!
 We implement 3D mesh modeling to visualize the network graph in a three-dimensional space. Attributes (e.g., node size, color) are assigned based on network properties to create an interactive and visually engaging representation.
 
 ### 6. User Interface (UI)

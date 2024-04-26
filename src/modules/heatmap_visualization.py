@@ -15,8 +15,8 @@ def getter (x,y) :
         Y.append(i)
 
 def start ():
-    x_mesh, y_mesh ,xc , yc= k.mesh(X, Y)
-    intensity_l = k.distance(xc,yc,X,Y)
+    x_mesh, y_mesh ,xc , yc,h= k.mesh(X, Y)
+    intensity_l = k.distance(xc,yc,X,Y,h)
     inten = np.array(intensity_l)
     plt.pcolormesh(x_mesh,y_mesh,inten)
     plt.plot(X,Y,'ro')

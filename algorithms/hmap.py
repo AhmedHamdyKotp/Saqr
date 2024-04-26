@@ -16,8 +16,8 @@ def kde_quartic(d,h):
     return P
 
 def mesh (X,Y):
-    grid_size = 1
-    h=.1
+    grid_size = .05
+    h=5
     min_x = min(X)
     max_x = max(X)
     min_y = min(Y)
@@ -29,9 +29,9 @@ def mesh (X,Y):
     x_mesh , y_mesh = np.meshgrid(x_grid,y_grid)
     xc = x_mesh + (grid_size/2)
     yc = y_mesh + (grid_size/2)
-    return x_mesh , y_mesh , xc ,yc
+    return x_mesh , y_mesh , xc ,yc, h
 
-def distance (xc,yc,x,y):
+def distance (xc,yc,x,y,h):
     intensity_list=[]
     for j in range(len(xc)):
         intensity_row=[]
@@ -40,8 +40,8 @@ def distance (xc,yc,x,y):
             for i in range(len(x)):
                 # CALCULATE DISTANCE
                 d=math.sqrt((xc[j][k]-x[i])**2+(yc[j][k]-y[i])**2)
-                if d<=.1:
-                    p=kde_quartic(d,.1)
+                if d<=h:
+                    p=kde_quartic(d,h)
                 else:
                     p=0
                 kde_value_list.append(p)
