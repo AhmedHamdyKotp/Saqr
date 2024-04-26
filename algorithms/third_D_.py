@@ -1,13 +1,13 @@
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+
 import networkx as nx
 import sys
 sys.path.append("src/modules") 
 import network_visualization as nv
-
+import Third_D_visualization as TD
 
 def _3D_ (pos,G) :
-    with open('data\processed\nodes_3d_pos.txt', 'w') as f:
+    pos = nx.spring_layout(G, dim=3)
+    with open('data/processed/nodes.txt', 'w') as f:
         for node in G.nodes:
             x, y, z = pos[node]
             f.write(f'{x},{y},{z}\n')
@@ -18,3 +18,5 @@ def _3D_ (pos,G) :
             z = [pos[edge[0]][2], pos[edge[1]][2]]
             f.write(f'{x[0]}, {y[0]}, {z[0]}\n')
             f.write(f'{x[1]}, {y[1]}, {z[1]}\n')
+    TD.build(G)
+    
