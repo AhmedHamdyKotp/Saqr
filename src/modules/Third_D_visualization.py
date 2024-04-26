@@ -1,26 +1,25 @@
-
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+import networkx as nx
 
-def build (G):
+def plot_3d_graph(G):
     fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')    
+    ax = fig.add_subplot(111, projection='3d')
+    pos = nx.spring_layout(G, dim=3, scale=2)
+
     for node in G.nodes:
-        node_size = G.degree(node) * 100  # Calculate node size here
-        node_color = 'skyblue' if G.nodes[node]['type'] == 'individual' else 'lightgreen'
-    X =[] ; Y =[] ; Z =[]
-    File = open('data/processed/odes.txt','r')
-    lines = File.readlines()
-    for i in range (len(lines)):
-        ss = lines[i].split(',')
-        X.append(float(ss[0]))
-        Y.append(float(ss[1]))
-        Z.append(float(ss[2]))
-    fig = plt.figure()
-    ax = fig.add_subplot(projection = '3d')
-    ax.scatter(X, Y, Z, s=node_size, c=node_color)
-    ax.set_label('X')
-    ax.set_label('Y')
-    ax.set_label('Z')
-    plt.draw()
-    
+        x, y, z = pos[node]
+        ax.scatter(x, y, z, s=100)
+        ax.text(x, y, z, node)
+
+    for edge in G.edges:
+        x = [pos[edge[0]][0], pos[edge[1]][0]]
+        y = [pos[edge[0]][1], pos[edge[1]][1]]
+        z = [pos[edge[0]][2], pos[edge[1]][2]]
+        ax.plot(x, y, z, color='grey')
+
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
+
+    plt.show()
