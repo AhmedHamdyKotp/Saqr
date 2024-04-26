@@ -1,10 +1,11 @@
 import sys
 sys.path.append('src/utils')
 sys.path.append('src/modules')
-import visualizer as v
+sys.path.append('tests/unit')
+import network_visualization as v
 import scraper as sc
 import constants 
-
+import mesh
 def extract_profession(data):
     print("Choose from these categories : ")
     print("ProfessionS\nNews\nPerson\nGeneral")
@@ -23,6 +24,5 @@ def extract_profession(data):
             print(f"URL: {url}")
         print("-------------------------")
     v.make_the_nodes(profession_found)
-    return profession_found
-
+    # mesh.make_the_nodes(profession_found) # testing
 
