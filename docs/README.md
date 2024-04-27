@@ -23,7 +23,7 @@ We use heatmap visualization techniques to depict the strength of relationships 
 ### 5. 3D Mesh Modeling ---> DONE !!
 We implement 3D mesh modeling to visualize the network graph in a three-dimensional space. Attributes (e.g., node size, color) are assigned based on network properties to create an interactive and visually engaging representation.
 
-### 6. User Interface (UI)
+### 6. User Interface (UI) ---> DONE !!
 The project includes a user-friendly interface for easy interaction with the network graph and visualization tools.
 
 ## Getting Started
