@@ -1,29 +1,76 @@
-import serpapi as se
-import requests as re
+import tkinter as tk
+from serpapi import GoogleSearch
 import sys
 sys.path.append("src/modules")  
 import scraper
 
-def user_input(api_key: str) -> None:
-    while True:
-        print("Enter a word to look for (or 'exit' to quit):")
-        search_term = input()
-        if search_term.lower() == 'exit':
-            break
+api_key_entry = None
+search_term_entry = None
+feedback_label = None
+button_style = {'font': ('Helvetica', 12, 'bold'), 'bg': '#5499C7', 'fg': 'white', 'relief': 'groove', 'bd': 3}
 
+def search(api_key, search_term):
+    try:
         params = {
             "q": search_term,
             'engine': 'google',
-            'hl':'en',
+            'hl': 'en',
             'api_key': api_key,
-            'num' : 100,
+            'num': 100,
         }
 
-        search = se.GoogleSearch(params)
-        result = search.get_dict()
-        scraper.organizing(result['organic_results'])
+        search = GoogleSearch(params)
+        results = search.get_dict()
+        scraper.organizing(results['organic_results'])
+        return "Search completed successfully!"
+    except Exception as e:
+        return f"An error occurred: {e}"
+
+def main():
+    global api_key_entry, search_term_entry, feedback_label
+
+    def on_search():
+        feedback_label.config(text="Searching...")
+        result = search(api_key_entry.get(), search_term_entry.get())
+        feedback_label.config(text=result)
+
+    def show_main_window():
+        welcome_window.destroy()
+        main_window()
+
+    def main_window():
+        global api_key_entry, search_term_entry, feedback_label
+
+        root = tk.Tk()
+        root.title("Saffa7 Trends")
+        root.geometry("500x700")
+        root.configure(bg="#D6EAF8")
+
+        label_style = {'font': ('Helvetica', 12), 'bg': '#D6EAF8'}
+        button_style = {'font': ('Helvetica', 12, 'bold'), 'bg': '#5499C7', 'fg': 'white', 'relief': 'groove', 'bd': 3}
+
+        tk.Label(root, text="Enter your SerpAPI key:", **label_style).pack(pady=(10,0))
+        api_key_entry = tk.Entry(root, font=('Helvetica', 10), bd=2)
+        api_key_entry.pack(pady=(0,10))
+
+        tk.Label(root, text="Enter a word to look for:", **label_style).pack(pady=(10,0))
+        search_term_entry = tk.Entry(root, font=('Helvetica', 10), bd=2)
+        search_term_entry.pack(pady=(0,10))
+
+        tk.Button(root, text="Search", command=on_search, **button_style).pack(pady=(0,10))
+
+        feedback_label = tk.Label(root, text="", **label_style)
+        feedback_label.pack(pady=(10,0))
+
+        root.mainloop()
+
+    welcome_window = tk.Tk()
+    welcome_window.title("Welcome")
+    welcome_window.geometry("300x200")
+    welcome_window.configure(bg="#D6EAF8")
+    tk.Label(welcome_window, text="Welcome to Saffa7 Trends!", bg="#D6EAF8", font=("Helvetica", 16)).pack(expand=True)
+    tk.Button(welcome_window, text="Continue", command=show_main_window, **button_style).pack(pady=(0,20))
+    welcome_window.mainloop()
 
 if __name__ == "__main__":
-    print("Enter your SerpAPI key: ")
-    api_key = input()
-    user_input(api_key)
+    main()
