@@ -3,7 +3,7 @@ from serpapi import GoogleSearch
 import sys
 sys.path.append("src/modules")  
 import scraper
-
+import network_visualization as nv
 api_key_entry = None
 search_term_entry = None
 feedback_label = None
@@ -25,7 +25,17 @@ def search(api_key, search_term):
         return "Search completed successfully!"
     except Exception as e:
         return f"An error occurred: {e}"
+def show_results_window():
+    results_window = tk.Tk()
+    results_window.title("Results")
+    results_window.geometry("300x200")
+    results_window.configure(bg="#D6EAF8")
 
+    tk.Button(results_window, text="Networks", command=nv.main(), **button_style).pack(pady=(10,0))
+    tk.Button(results_window, text="Heatmap", **button_style).pack(pady=(10,0))
+    tk.Button(results_window, text="3D Modelling", **button_style).pack(pady=(10,0))
+
+    results_window.mainloop()
 def main():
     global api_key_entry, search_term_entry, feedback_label
 
@@ -33,6 +43,7 @@ def main():
         feedback_label.config(text="Searching...")
         result = search(api_key_entry.get(), search_term_entry.get())
         feedback_label.config(text=result)
+        show_results_window()
 
     def show_main_window():
         welcome_window.destroy()
