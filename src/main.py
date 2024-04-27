@@ -4,6 +4,9 @@ import sys
 sys.path.append("src/modules")  
 import scraper
 import network_visualization as nv
+import heatmap_visualization as hm
+import Third_D_visualization as td
+
 api_key_entry = None
 search_term_entry = None
 feedback_label = None
@@ -31,9 +34,9 @@ def show_results_window():
     results_window.geometry("300x200")
     results_window.configure(bg="#D6EAF8")
 
-    tk.Button(results_window, text="Networks", command=nv.main(), **button_style).pack(pady=(10,0))
-    tk.Button(results_window, text="Heatmap", **button_style).pack(pady=(10,0))
-    tk.Button(results_window, text="3D Modelling", **button_style).pack(pady=(10,0))
+    tk.Button(results_window, text="Networks", command=nv.make_the_nodes, **button_style).pack(pady=(10,0))
+    tk.Button(results_window, text="Heatmap",command= hm.start,**button_style).pack(pady=(10,0))
+    tk.Button(results_window, text="3D Modelling", command =td.action, **button_style).pack(pady=(10,0))
 
     results_window.mainloop()
 def main():

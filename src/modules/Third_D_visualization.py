@@ -1,6 +1,9 @@
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import networkx as nx
+import network_visualization as nv
+import json
+
 
 def plot_3d_graph(G):
     fig = plt.figure()
@@ -23,3 +26,10 @@ def plot_3d_graph(G):
     ax.set_zlabel('Z')
 
     plt.show()
+
+def action ():
+    nv.getG()
+    with open('data/rawgraph_dict.json', 'r') as f:
+     G_dict = json.load(f)
+    G = nx.from_dict_of_dicts(G_dict)
+    plot_3d_graph(G)
