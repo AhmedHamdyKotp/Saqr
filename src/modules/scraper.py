@@ -6,6 +6,8 @@ sys.path.append('src')
 import main as mi
 import constants 
 import json
+from tkinter import font as tkfont
+import webbrowser
 def extract_profession(data, choice):
     profession = constants.filter(choice)    
     profession_found = {}
@@ -17,6 +19,38 @@ def extract_profession(data, choice):
     with open('data/processed/profession_found.json', 'w') as f:
         json.dump(profession_found, f)
     mi.show_results_window()
+
+def callback(url):
+    webbrowser.open_new(url)
+
+
+def sres():
+
+    with open('data/processed/profession_found.json', 'r') as f:
+        profession_found =json.load(f)  
+    window = tk.Tk()
+    window.title("Profession Data")
+    window.geometry("500x500")
+    window.configure(bg="#D6EAF8")
+
+    font_style = tkfont.Font(family="Helvetica", size=14)
+
+    scrollbar = tk.Scrollbar(window)
+    scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+    text = tk.Text(window, yscrollcommand=scrollbar.set, font=font_style, bg="#D6EAF8", wrap=tk.WORD)
+    text.pack(side=tk.LEFT, fill=tk.BOTH)
+    for profession, urls in profession_found.items():
+        text.insert(tk.END, f"Profession: {profession}\n")
+        for url in urls:
+            text.insert(tk.END, "URL: ")
+            text.insert(tk.END, f"{url}\n", (url,))
+            text.tag_config(url, foreground="blue", underline=1)
+            text.tag_bind(url, "<Button-1>", lambda e, url=url: callback(url))
+
+    scrollbar.config(command=text.yview)
+
+    window.mainloop()
 
 def organizing(or_result):
     Data = []
