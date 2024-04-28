@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 from serpapi import GoogleSearch
 import sys
 sys.path.append("src/modules")  
@@ -6,11 +7,6 @@ import scraper
 import network_visualization as nv
 import heatmap_visualization as hm
 import Third_D_visualization as td
-
-api_key_entry = None
-search_term_entry = None
-feedback_label = None
-button_style = {'font': ('Helvetica', 12, 'bold'), 'bg': '#5499C7', 'fg': 'white', 'relief': 'groove', 'bd': 3}
 
 def search(api_key, search_term):
     try:
@@ -28,64 +24,49 @@ def search(api_key, search_term):
         return "Search completed successfully!"
     except Exception as e:
         return f"An error occurred: {e}"
+
 def show_results_window():
     results_window = tk.Tk()
     results_window.title("Results")
     results_window.geometry("300x200")
     results_window.configure(bg="#D6EAF8")
 
-    tk.Button(results_window,text="Results",command=scraper.sres,**button_style).pack(pady=(10,0))
-    tk.Button(results_window, text="Networks", command=nv.make_the_nodes, **button_style).pack(pady=(10,0))
-    tk.Button(results_window, text="Heatmap",command= hm.start,**button_style).pack(pady=(10,0))
-    tk.Button(results_window, text="3D Modelling", command =td.action, **button_style).pack(pady=(10,0))
+    tk.Button(results_window,text="Results",command=scraper.sres).pack(pady=(10,0))
+    tk.Button(results_window, text="Networks", command=nv.make_the_nodes).pack(pady=(10,0))
+    tk.Button(results_window, text="Heatmap",command= hm.start).pack(pady=(10,0))
+    tk.Button(results_window, text="3D Modelling", command =td.action).pack(pady=(10,0))
 
     results_window.mainloop()
-def main():
-    global api_key_entry, search_term_entry, feedback_label
 
-    def on_search():
-        feedback_label.config(text="Searching...")
-        result = search(api_key_entry.get(), search_term_entry.get())
-        feedback_label.config(text=result)
-        show_results_window()
+window = tk.Tk()
+window.title("MainWindow")
+window.geometry("640x480")
+window.configure(bg = '#e3d9e7')
+label = ttk.Label(window, text="Type Your serpAPI key here", font=("Bernard MT Condensed", 20))
+label.place(x=160, y=50)
 
-    def show_main_window():
-        welcome_window.destroy()
-        main_window()
+plainTextEdit = tk.Text(window, height=2, width=60)
+plainTextEdit.place(x=60, y=90)
 
-    def main_window():
-        global api_key_entry, search_term_entry, feedback_label
+label_2 = ttk.Label(window, text="What are You looking for?", font=("Bernard MT Condensed", 20),)
+label_2.place(x=160, y=160)
 
-        root = tk.Tk()
-        root.title("Saffa7 Trends")
-        root.geometry("500x700")
-        root.configure(bg="#D6EAF8")
+plainTextEdit_2 = tk.Text(window, height=2, width=60)
+plainTextEdit_2.place(x=60, y=210)
 
-        label_style = {'font': ('Helvetica', 12), 'bg': '#D6EAF8'}
-        button_style = {'font': ('Helvetica', 12, 'bold'), 'bg': '#5499C7', 'fg': 'white', 'relief': 'groove', 'bd': 3}
+label_3 = ttk.Label(window, text="Type your key words if needed\n\tSOON!", font=("Bernard MT Condensed", 20))
+label_3.place(x=150, y=270)
 
-        tk.Label(root, text="Enter your SerpAPI key:", **label_style).pack(pady=(10,0))
-        api_key_entry = tk.Entry(root, font=('Helvetica', 10), bd=2)
-        api_key_entry.pack(pady=(0,10))
+# plainTextEdit_3 = tk.Text(window, height=2, width=60)
+# plainTextEdit_3.place(x=60, y=330)
 
-        tk.Label(root, text="Enter a word to look for:", **label_style).pack(pady=(10,0))
-        search_term_entry = tk.Entry(root, font=('Helvetica', 10), bd=2)
-        search_term_entry.pack(pady=(0,10))
+def on_search():
+    api_key = plainTextEdit.get("1.0", "end-1c")
+    search_term = plainTextEdit_2.get("1.0", "end-1c")
+    result = search(api_key, search_term)
+    label_3.config(text=result)
 
-        tk.Button(root, text="Search", command=on_search, **button_style).pack(pady=(0,10))
+pushButton = ttk.Button(window, text="Search Now", command=on_search)
+pushButton.place(x=270, y=410)
 
-        feedback_label = tk.Label(root, text="", **label_style)
-        feedback_label.pack(pady=(10,0))
-
-        root.mainloop()
-
-    welcome_window = tk.Tk()
-    welcome_window.title("Welcome")
-    welcome_window.geometry("300x200")
-    welcome_window.configure(bg="#D6EAF8")
-    tk.Label(welcome_window, text="Welcome to Saffa7 Trends!", bg="#D6EAF8", font=("Helvetica", 16)).pack(expand=True)
-    tk.Button(welcome_window, text="Continue", command=show_main_window, **button_style).pack(pady=(0,20))
-    welcome_window.mainloop()
-
-if __name__ == "__main__":
-    main()
+window.mainloop()
