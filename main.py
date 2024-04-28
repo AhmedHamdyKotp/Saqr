@@ -8,6 +8,10 @@ import network_visualization as nv
 import heatmap_visualization as hm
 import Third_D_visualization as td
 
+api_key_entry = None
+search_term_entry = None
+feedback_label = None
+
 def search(api_key, search_term):
     try:
         params = {
@@ -26,7 +30,7 @@ def search(api_key, search_term):
         return f"An error occurred: {e}"
 
 def show_results_window():
-    results_window = tk.Tk()
+    results_window = tk.Toplevel()  # Use Toplevel() instead of Tk()
     results_window.title("Results")
     results_window.geometry("300x200")
     results_window.configure(bg="#D6EAF8")
@@ -36,37 +40,43 @@ def show_results_window():
     tk.Button(results_window, text="Heatmap",command= hm.start).pack(pady=(10,0))
     tk.Button(results_window, text="3D Modelling", command =td.action).pack(pady=(10,0))
 
-    results_window.mainloop()
+def main():
+    global api_key_entry, search_term_entry, feedback_label
 
-window = tk.Tk()
-window.title("MainWindow")
-window.geometry("640x480")
-window.configure(bg = '#e3d9e7')
-label = ttk.Label(window, text="Type Your serpAPI key here", font=("Bernard MT Condensed", 20))
-label.place(x=160, y=50)
+    def on_search():
+        api_key = api_key_entry.get("1.0", "end-1c")
+        search_term = search_term_entry.get("1.0", "end-1c")
+        if api_key and search_term:  # checks if both fields are not empty
+            result = search(api_key, search_term)
+            feedback_label.config(text=result)
+            show_results_window()
+        else:
+            feedback_label.config(text="Please fill in all fields.")
 
-plainTextEdit = tk.Text(window, height=2, width=60)
-plainTextEdit.place(x=60, y=90)
+    root = tk.Tk()
+    root.title("MainWindow")
+    root.geometry("640x480")
+    root.configure(bg = '#e3d9e7')
 
-label_2 = ttk.Label(window, text="What are You looking for?", font=("Bernard MT Condensed", 20),)
-label_2.place(x=160, y=160)
+    label = ttk.Label(root, text="Type Your serpAPI key here", font=("Bernard MT Condensed", 20))
+    label.place(x=160, y=50)
 
-plainTextEdit_2 = tk.Text(window, height=2, width=60)
-plainTextEdit_2.place(x=60, y=210)
+    api_key_entry = tk.Text(root, height=2, width=60)
+    api_key_entry.place(x=60, y=90)
 
-label_3 = ttk.Label(window, text="Type your key words if needed\n\tSOON!", font=("Bernard MT Condensed", 20))
-label_3.place(x=150, y=270)
+    label_2 = ttk.Label(root, text="What are You looking for?", font=("Bernard MT Condensed", 20),)
+    label_2.place(x=160, y=160)
 
-# plainTextEdit_3 = tk.Text(window, height=2, width=60)
-# plainTextEdit_3.place(x=60, y=330)
+    search_term_entry = tk.Text(root, height=2, width=60)
+    search_term_entry.place(x=60, y=210)
 
-def on_search():
-    api_key = plainTextEdit.get("1.0", "end-1c")
-    search_term = plainTextEdit_2.get("1.0", "end-1c")
-    result = search(api_key, search_term)
-    label_3.config(text=result)
+    feedback_label = ttk.Label(root, text="Type your key words if needed\n\tSOON!", font=("Bernard MT Condensed", 20))
+    feedback_label.place(x=150, y=270)
 
-pushButton = ttk.Button(window, text="Search Now", command=on_search)
-pushButton.place(x=270, y=410)
+    pushButton = ttk.Button(root, text="Search Now", command=on_search)
+    pushButton.place(x=270, y=410)
 
-window.mainloop()
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
