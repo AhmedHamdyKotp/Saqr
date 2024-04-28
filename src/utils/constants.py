@@ -94,7 +94,7 @@ def filter (choosen):
     'The Irish Times', 'The Scotsman', 'The Hindu', 'Dawn', 'The Express Tribune',
     'South China Morning Post', 'The Times of Israel', 'The Nation', 'The Star', 'The New Paper',
     'The Standard', 'The Mercury', 'The Star', 'The Daily Nation', 'The East African',
-    'Al-Ahram', 'Al-Masry Al-Youm', 'Youm7', 'Ahram Online', 'Egypt Independent',
+    'Al-Ahram', 'Al-Masry Al-Youm', 'Youm7', 'Ahram Online', 'Egypt Independent', 'Alarabia'
     ]
     popular_people = [
     'Marilyn Monroe', 'Abraham Lincoln', 'Nelson Mandela', 'Queen Elizabeth II', 'John F. Kennedy',
