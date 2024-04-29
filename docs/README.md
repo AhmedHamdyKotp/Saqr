@@ -30,7 +30,7 @@ The project includes a user-friendly interface for easy interaction with the net
 To get started with this project, you'll need to install some dependencies. Please refer to the `requirements.txt` file for a list of required packages.
 
 ## Contributing
-We welcome contributions! Please see our `CONTRIBUTING.md` file for details on how to contribute to this project.
+Actually it is for my personal coding skills, next verions will be welcomed for any one to contribute.
 
 ## License
 
