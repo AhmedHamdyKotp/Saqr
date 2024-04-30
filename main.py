@@ -54,7 +54,7 @@ def main():
             feedback_label.config(text="Please fill in all fields.")
 
     root = tk.Tk()
-    root.title("Saffa7 Trends")
+    root.title("Saqr")
     root.geometry("640x480")
     root.configure(bg = '#e3d9e7')
 
