@@ -30,9 +30,9 @@ def make_the_nodes():
     node_sizes = [G.degree(node) * 100 for node in G]
     node_colors = ['skyblue' if G.nodes[node]['type'] == 'individual' else 'lightgreen' for node in G]
     pos = nx.spring_layout(G, k=0.3)
+    save_positions_to_json(pos)
     nx.draw(G, pos, with_labels=True, node_color=node_colors, node_size=node_sizes, font_size=8)
     plt.show()
-    # TD.plot_3d_graph(G)
     show_data_window(sortion,com)
 
     return G
@@ -72,13 +72,9 @@ def show_data_window(sortion, com):
     tk.Label(data_window, text=f"Detected {len(com)} communities.", bg="#D6EAF8", font=("Helvetica", 16)).pack()
     data_window.mainloop()
 
-def heatmap_algorithms(pos,G):
-    x = []
-    y = []
-    for node in G.nodes:
-        if G.nodes[node]['type'] == 'profession':
-            x.append(pos[node][0])
-            y.append(pos[node][1])
+def save_positions_to_json(pos):
+    pos_dict = {node: list(pos[node]) for node in pos}
+
     with open('data/raw/xy_data.json', 'w') as f:
-        json.dump({'x': x, 'y': y}, f)
-    hm.start()
+        json.dump(pos_dict, f)
+    # hm.start()

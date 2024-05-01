@@ -30,15 +30,18 @@ def search(api_key, search_term):
         return f"An error occurred: {e}"
 
 def show_results_window():
-    results_window = tk.Toplevel()  # Use Toplevel() instead of Tk()
+    results_window = tk.Toplevel()  
     results_window.title("Results")
     results_window.geometry("300x200")
-    results_window.configure(bg="#D6EAF8")
+    results_window.configure(bg='#e3d9e7')  
 
-    tk.Button(results_window,text="Results",command=scraper.sres).pack(pady=(10,0))
-    tk.Button(results_window, text="Networks", command=nv.make_the_nodes).pack(pady=(10,0))
-    tk.Button(results_window, text="Heatmap",command= hm.start).pack(pady=(10,0))
-    tk.Button(results_window, text="3D Modelling", command =td.action).pack(pady=(10,0))
+    results_button_style = ttk.Style()
+    results_button_style.configure('TButton', font=("Bernard MT Condensed", 12))
+
+    ttk.Button(results_window, text="Results", command=scraper.sres).pack(pady=(10,0))
+    ttk.Button(results_window, text="Networks", command=nv.make_the_nodes).pack(pady=(10,0))
+    ttk.Button(results_window, text="Heatmap", command=hm.start).pack(pady=(10,0))
+    ttk.Button(results_window, text="3D Modelling", command=td.action).pack(pady=(10,0))
 
 def main():
     global api_key_entry, search_term_entry, feedback_label
@@ -46,9 +49,16 @@ def main():
     def on_search():
         api_key = api_key_entry.get("1.0", "end-1c")
         search_term = search_term_entry.get("1.0", "end-1c")
-        if api_key and search_term:  # checks if both fields are not empty
+        if api_key  and search_term:  
             result = search(api_key, search_term)
             feedback_label.config(text=result)
+            with open('data/processed/profession_found.json', 'w') as file:
+                pass 
+            with open('data/raw/xy_data.json', 'w') as file:
+                pass 
+            with open('data/rawgraph_dict.json', 'w') as file:
+                pass 
+
             show_results_window()
         else:
             feedback_label.config(text="Please fill in all fields.")

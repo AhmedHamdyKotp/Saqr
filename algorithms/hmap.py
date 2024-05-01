@@ -15,21 +15,20 @@ def kde_quartic(d,h):
     P = (15/16)*(1-dn**2)**2
     return P
 
-def mesh (X,Y):
-    grid_size = .05
-    h=5
+def mesh(X, Y, grid_size=0.1, h=.5):
     min_x = min(X)
     max_x = max(X)
     min_y = min(Y)
     max_y = max(Y)
 
-    x_grid = np.arange(min_x - h , max_x + h , grid_size)
-    y_grid = np.arange(min_y - h , max_y +h , grid_size)
+    x_grid = np.arange(min_x - h, max_x + h, grid_size)
+    y_grid = np.arange(min_y - h, max_y + h, grid_size)
 
-    x_mesh , y_mesh = np.meshgrid(x_grid,y_grid)
-    xc = x_mesh + (grid_size/2)
-    yc = y_mesh + (grid_size/2)
-    return x_mesh , y_mesh , xc ,yc, h
+    x_mesh, y_mesh = np.meshgrid(x_grid, y_grid)
+    xc = x_mesh + (grid_size / 2)
+    yc = y_mesh + (grid_size / 2)
+    return x_mesh, y_mesh, xc, yc, h
+
 
 def distance (xc,yc,x,y,h):
     intensity_list=[]
