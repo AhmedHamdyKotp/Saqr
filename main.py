@@ -36,7 +36,7 @@ def searchk(api_key, search_term):
             'engine': 'google',
             'hl': 'en',
             'api_key': api_key,
-            'num': 100,
+            'num': 1000,
         }
 
         search = GoogleSearch(params)
