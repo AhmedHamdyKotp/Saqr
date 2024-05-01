@@ -63,11 +63,27 @@ def main():
         else:
             feedback_label.config(text="Please fill in all fields.")
 
+
+
+    def toggle_keywords_entry():
+        if keywords_var.get():
+            feedback_label.place(x=150, y=280)
+            keywords_entry.place(x=60, y=310)
+        else:
+            feedback_label.place_forget()
+            keywords_entry.place_forget()
     root = tk.Tk()
     root.title("Saqr")
-    root.geometry("640x480")
     root.configure(bg = '#e3d9e7')
+    window_width = 640
+    window_height = 480
 
+    screen_width = root.winfo_screenwidth()
+    screen_height = root.winfo_screenheight()
+    position_top = int(screen_height / 2 - window_height / 2)
+    position_right = int(screen_width / 2 - window_width / 2)
+
+    root.geometry(f"{window_width}x{window_height}+{position_right}+{position_top}")
     label = ttk.Label(root, text="Type Your serpAPI key here", font=("Bernard MT Condensed", 20))
     label.place(x=160, y=50)
 
@@ -79,14 +95,17 @@ def main():
 
     search_term_entry = tk.Text(root, height=2, width=60)
     search_term_entry.place(x=60, y=210)
+    keywords_var = tk.BooleanVar()
 
-    feedback_label = ttk.Label(root, text="Type your key words if needed\n\tSOON!", font=("Bernard MT Condensed", 20))
-    feedback_label.place(x=150, y=270)
+    keywords_checkbox = ttk.Checkbutton(root, text="Sign your own keywords", variable=keywords_var, command=toggle_keywords_entry)
+    keywords_checkbox.place(relx=0.5, rely=0.55, anchor='center')
+
+    feedback_label = ttk.Label(root, text="Type your key words if needed", font=("Bernard MT Condensed", 20))
+    keywords_entry = tk.Text(root, height=2, width=60)
 
     pushButton = ttk.Button(root, text="Search Now", command=on_search)
     pushButton.place(x=270, y=410)
 
     root.mainloop()
-
 if __name__ == "__main__":
     main()
