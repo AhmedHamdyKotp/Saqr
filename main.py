@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from serpapi import GoogleSearch
 import sys
+import json
 sys.path.append("src/modules")  
 import scraper
 import network_visualization as nv
@@ -49,9 +50,17 @@ def main():
     def on_search():
         api_key = api_key_entry.get("1.0", "end-1c")
         search_term = search_term_entry.get("1.0", "end-1c")
-        if api_key  and search_term:  
+        
+        if api_key and search_term:  
+            if keywords_var.get():
+                keywords = keywords_entry.get("1.0", "end-1c").split()
+                # Save the keywords to a JSON file
+                with open('data/external/key_words.json', 'w') as f:
+                    json.dump(keywords, f)
+            
             result = search(api_key, search_term)
             feedback_label.config(text=result)
+            
             with open('data/processed/profession_found.json', 'w') as file:
                 pass 
             with open('data/raw/xy_data.json', 'w') as file:
@@ -62,6 +71,7 @@ def main():
             show_results_window()
         else:
             feedback_label.config(text="Please fill in all fields.")
+
 
 
 
