@@ -29,7 +29,22 @@ def search(api_key, search_term):
         return "Search completed successfully!"
     except Exception as e:
         return f"An error occurred: {e}"
+def searchk(api_key, search_term):
+    try:
+        params = {
+            "q": search_term,
+            'engine': 'google',
+            'hl': 'en',
+            'api_key': api_key,
+            'num': 100,
+        }
 
+        search = GoogleSearch(params)
+        results = search.get_dict()
+        scraper.organizing_k(results['organic_results'])
+        return "Search completed successfully!"
+    except Exception as e:
+        return f"An error occurred: {e}"
 def show_results_window():
     results_window = tk.Toplevel()  
     results_window.title("Results")
@@ -43,6 +58,19 @@ def show_results_window():
     ttk.Button(results_window, text="Networks", command=nv.make_the_nodes).pack(pady=(10,0))
     ttk.Button(results_window, text="Heatmap", command=hm.start).pack(pady=(10,0))
     ttk.Button(results_window, text="3D Modelling", command=td.action).pack(pady=(10,0))
+def show_results_window_k():
+    results_window = tk.Toplevel()  
+    results_window.title("Results")
+    results_window.geometry("300x200")
+    results_window.configure(bg='#e3d9e7')  
+
+    results_button_style = ttk.Style()
+    results_button_style.configure('TButton', font=("Bernard MT Condensed", 12))
+
+    ttk.Button(results_window, text="Results", command=scraper.sres_k).pack(pady=(10,0))
+    ttk.Button(results_window, text="Networks", command=nv.make_the_nodes).pack(pady=(10,0))
+    ttk.Button(results_window, text="Heatmap", command=hm.start).pack(pady=(10,0))
+    ttk.Button(results_window, text="3D Modelling", command=td.action).pack(pady=(10,0))
 
 def main():
     global api_key_entry, search_term_entry, feedback_label
@@ -53,14 +81,18 @@ def main():
         
         if api_key and search_term:  
             if keywords_var.get():
-                keywords = keywords_entry.get("1.0", "end-1c").split()
+                keywords = keywords_entry.get("1.0", "end-1c").split(" ")
                 # Save the keywords to a JSON file
                 with open('data/external/key_words.json', 'w') as f:
                     json.dump(keywords, f)
-            
-            result = search(api_key, search_term)
-            feedback_label.config(text=result)
-            
+                result = searchk(api_key, search_term)
+                feedback_label.config(text=result) 
+            else :                 
+
+                result = search(api_key, search_term)
+                feedback_label.config(text=result)
+                show_results_window()
+
             with open('data/processed/profession_found.json', 'w') as file:
                 pass 
             with open('data/raw/xy_data.json', 'w') as file:
@@ -68,7 +100,6 @@ def main():
             with open('data/rawgraph_dict.json', 'w') as file:
                 pass 
 
-            show_results_window()
         else:
             feedback_label.config(text="Please fill in all fields.")
 

@@ -23,12 +23,56 @@ def extract_profession(data, choice):
 def callback(url):
     webbrowser.open_new(url)
 
+def extract_profession_k(data):  
+    def load_keywords():
+        with open('data/external/key_words.json', 'r') as f:
+            keywords = json.load(f)
+        return keywords
+    Keywords=load_keywords()
+    profession_found = {}
+
+    for item in data:
+        for i in Keywords:
+            if i.lower() in item['title'].lower() or i.lower() in item['snippet'].lower():
+                profession_found[i] = profession_found.get(i, []) + [item['url']]
+    with open('data/external/data.json', 'w') as f:
+        json.dump(profession_found, f)
+    mi.show_results_window_k()
+
+def callback(url):
+    webbrowser.open_new(url)
 
 def sres():
     with open('data/processed/profession_found.json', 'r') as f:
         profession_found = json.load(f)  
     window = tk.Tk()
-    window.title("Profession Data")
+    window.title("Categories Data")
+    window.geometry("500x500")
+    window.configure(bg='#e3d9e7') 
+
+    font_style = tkfont.Font(family="Bernard MT Condensed", size=14)
+
+    scrollbar = tk.Scrollbar(window)
+    scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+    text = tk.Text(window, yscrollcommand=scrollbar.set, font=font_style, bg='#e3d9e7', wrap=tk.WORD)  # Same background color
+    text.pack(side=tk.LEFT, fill=tk.BOTH)
+    for profession, urls in profession_found.items():
+        text.insert(tk.END, f"Category: {profession}\n")
+        for url in urls:
+            text.insert(tk.END, "URL: ")
+            text.insert(tk.END, f"{url}\n", (url,))
+            text.tag_config(url, foreground="blue", underline=1)
+            text.tag_bind(url, "<Button-1>", lambda e, url=url: callback(url))
+
+    scrollbar.config(command=text.yview)
+
+    window.mainloop()
+def sres_k():
+    with open('data/external/data.json', 'r') as f:
+        profession_found = json.load(f)  
+    window = tk.Tk()
+    window.title("Categories Data")
     window.geometry("500x500")
     window.configure(bg='#e3d9e7') 
 
@@ -51,7 +95,6 @@ def sres():
 
     window.mainloop()
 
-
 def organizing(or_result):
     Data = []
     for item in or_result :
@@ -61,8 +104,19 @@ def organizing(or_result):
         data={"url":url,"title":title,"snippet":snippet if snippet else  ""}
         Data.append(data)
     main(Data)
+def organizing_k(or_result):
+    Data = []
+    for item in or_result :
+        url = item['link']
+        title = item['title']
+        snippet = item.get('snippet', "")
+        data={"url":url,"title":title,"snippet":snippet if snippet else  ""}
+        Data.append(data)
+    extract_profession_k(Data)
 
-def main(data):
+
+
+def main(Data):
     root = tk.Tk()
     root.title("Choose a Category")
     root.geometry("300x300")
@@ -81,7 +135,7 @@ def main(data):
     drop_down_menu.config(font=font_style, bg='#e3d9e7') 
     drop_down_menu.pack(pady=(0,20))
 
-    submit_button = tk.Button(root, text="Submit", command=lambda: extract_profession(data, choice_var.get()), font=font_style, bg='#5499C7', fg='white')
+    submit_button = tk.Button(root, text="Submit", command=lambda: extract_profession(Data, choice_var.get()), font=font_style, bg='#5499C7', fg='white')
     submit_button.pack(pady=(0,20))
 
     root.mainloop()
