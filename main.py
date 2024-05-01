@@ -68,9 +68,6 @@ def show_results_window_k():
     results_button_style.configure('TButton', font=("Bernard MT Condensed", 12))
 
     ttk.Button(results_window, text="Results", command=scraper.sres_k).pack(pady=(10,0))
-    ttk.Button(results_window, text="Networks", command=nv.make_the_nodes).pack(pady=(10,0))
-    ttk.Button(results_window, text="Heatmap", command=hm.start).pack(pady=(10,0))
-    ttk.Button(results_window, text="3D Modelling", command=td.action).pack(pady=(10,0))
 
 def main():
     global api_key_entry, search_term_entry, feedback_label
