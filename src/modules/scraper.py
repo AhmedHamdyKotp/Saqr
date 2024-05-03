@@ -43,8 +43,25 @@ def callback(url):
     webbrowser.open_new(url)
 
 def sres():
+    def open_link(url):
+        def keep_going():
+            webbrowser.open(url)
+            choice_window.destroy()
+
+        def scrap_it():
+            # Add your scraping code here
+            print(f"Scraping {url}")
+            choice_window.destroy()
+
+        choice_window = tk.Toplevel(window)
+        choice_window.geometry("200x100")
+        tk.Button(choice_window, text="Keep Going", command=keep_going).pack()
+        tk.Button(choice_window, text="Scrap It", command=scrap_it).pack()
+        tk.Button(choice_window, text="Cancel", command=choice_window.destroy).pack()
+
     with open('data/processed/profession_found.json', 'r') as f:
         profession_found = json.load(f)  
+
     window = tk.Tk()
     window.title("Categories Data")
     window.geometry("500x500")
@@ -63,11 +80,14 @@ def sres():
             text.insert(tk.END, "URL: ")
             text.insert(tk.END, f"{url}\n", (url,))
             text.tag_config(url, foreground="blue", underline=1)
-            text.tag_bind(url, "<Button-1>", lambda e, url=url: callback(url))
+            text.tag_bind(url, "<Button-1>", lambda e, url=url: open_link(url))
 
     scrollbar.config(command=text.yview)
 
     window.mainloop()
+
+sres()
+
 def sres_k():
     with open('data/external/data.json', 'r') as f:
         profession_found = json.load(f)  
