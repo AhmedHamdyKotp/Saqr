@@ -79,7 +79,6 @@ def main():
         if api_key and search_term:  
             if keywords_var.get():
                 keywords = keywords_entry.get("1.0", "end-1c").split(" ")
-                # Save the keywords to a JSON file
                 with open('data/external/key_words.json', 'w') as f:
                     json.dump(keywords, f)
                 result = searchk(api_key, search_term)

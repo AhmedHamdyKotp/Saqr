@@ -7,7 +7,7 @@ import main as mi
 import constants 
 import json
 from tkinter import font as tkfont
-import webbrowser
+import webbrowser ; import solo_scraper
 def extract_profession(data, choice):
     profession = constants.filter(choice)    
     profession_found = {}
@@ -49,15 +49,15 @@ def sres():
             choice_window.destroy()
 
         def scrap_it():
-            # Add your scraping code here
-            print(f"Scraping {url}")
+            solo_scraper.scrap_it(url,window)
             choice_window.destroy()
 
         choice_window = tk.Toplevel(window)
-        choice_window.geometry("200x100")
-        tk.Button(choice_window, text="Keep Going", command=keep_going).pack()
-        tk.Button(choice_window, text="Scrap It", command=scrap_it).pack()
-        tk.Button(choice_window, text="Cancel", command=choice_window.destroy).pack()
+        choice_window.geometry("400x400")
+        choice_window.configure(bg='#e3d9e7')
+        tk.Button(choice_window, text="Keep Going", command=keep_going).pack(pady=(10,0))
+        tk.Button(choice_window, text="Scrap It", command=scrap_it).pack(pady=(10,0))
+        tk.Button(choice_window, text="Cancel", command=choice_window.destroy).pack(pady=(10,0))
 
     with open('data/processed/profession_found.json', 'r') as f:
         profession_found = json.load(f)  
@@ -86,7 +86,6 @@ def sres():
 
     window.mainloop()
 
-sres()
 
 def sres_k():
     with open('data/external/data.json', 'r') as f:
